@@ -1,5 +1,22 @@
 body{
     color: aliceblue;
     background-color: #272F35;
-    align-items: center;
+}
+
+
+.title{
+    font-size: 300%;
+}
+.main_table{
+    width: 100%;
+    padding: 2%;
+}
+
+.table_icon{
+    width: 80%;
+}
+a{
+    font-family:monospace;
+    font-size: 15px;
+    color: aliceblue ;   
 }
