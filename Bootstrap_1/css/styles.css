@@ -1,0 +1,90 @@
+/*============ TAG ============*/
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1.5;
+    
+}
+
+a {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #f7f7f7;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+
+/*============ CLASS ============*/
+
+.navbar{
+    margin: 35px 0 40px;
+}
+
+.nav-link {
+    font-size: 1.2rem;
+    font-family: 'Montserrat' sans-serif;
+    font-weight: 200;
+}
+
+.nav-item {
+    padding-left: 20px;
+}
+
+.container {
+    padding: 0;
+}
+
+.container-fluid {
+    padding: 3% 15%;
+}
+
+.btn-lg {
+    margin-right: 20px;
+    margin-top: 30px;
+}
+
+.logo {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #f7f7f7;
+
+}
+
+.landing-img {
+    transform: rotate(25deg) scale(85%);
+}
+
+.title-features {
+    font-family: 'Montserrat' sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+}
+
+
+/*============ ID ============*/
+
+#title {
+    background-color: #ff4c68;
+    height: 90%;
+    overflow: hidden;
+    color: #f7f7f7;
+}
+
+#features {
+    background-color: #f7f7f7;
+    padding: 10% 0 10%;
+    text-align: center;
+}
