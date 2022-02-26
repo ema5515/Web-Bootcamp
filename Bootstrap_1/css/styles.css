@@ -55,7 +55,7 @@ body {
 }
 
 .container-fluid {
-    padding: 3% 15%;
+    padding: 3% 15% 0;
 }
 
 .btn-lg {
@@ -73,6 +73,8 @@ body {
 
 .landing-img {
     transform: rotate(25deg) scale(85%);
+    position: relative;
+    left: 10%;
 }
 
 .title-features {
@@ -98,7 +100,7 @@ body {
 .testimonials-image{
     width: 10%;
     border-radius: 100%;
-    margin: 20px; 
+    margin: 10px; 
 }
 
 .press-logo {
@@ -110,13 +112,19 @@ body {
     padding: 15% 10%;
 }
 
+.btn-bk {
+    width: 100%;
+}
+
+.pricing-column {
+    padding: 3% 2%;
+}
+
 
 /*============ ID ============*/
 
 #title {
     background-color: #ff4c68;
-    height: 90%;
-    overflow: hidden;
     color: #f7f7f7;
 }
 
@@ -124,6 +132,10 @@ body {
     background-color: #f7f7f7;
     padding: 10% 1%;
     text-align: center;
+    position: relative;
+    z-index: 50;
+    width: 100%;
+    margin-top: -15%;
 }
 
 #testimonials {
@@ -136,5 +148,9 @@ body {
     background-color: #ef8172;
     text-align: center;
     padding: 3%;
+}
 
+#pricing {
+    padding: 100px;
+    text-align: center;
 }
