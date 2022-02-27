@@ -120,6 +120,18 @@ body {
     padding: 3% 2%;
 }
 
+.cta-title {
+    font-family: 'Montserrat' sans-serif;
+    font-weight: 900;
+    color: #f7f7f7;
+}
+
+.social-links {
+    padding: 20px;
+}
+.social{
+    padding: 10px;
+}
 
 /*============ ID ============*/
 
@@ -153,4 +165,17 @@ body {
 #pricing {
     padding: 100px;
     text-align: center;
+}
+
+#cta {
+    background-color: #ff4c68;
+    text-align: center;
+    padding: 7% 15%;
+
+}
+
+#footer {
+    background-color: #f7f7f7;
+    text-align: center;
+    padding: 7% 15%;
 }
