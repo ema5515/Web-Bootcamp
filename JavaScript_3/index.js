@@ -62,6 +62,7 @@ function handleClick() {
 
 
 function buttonAnimation(currentKey){
+    console.log(currentKey);
     var activeButton = document.querySelector("." + currentKey);
     activeButton.classList.add("pressed");
 
