@@ -22,27 +22,32 @@ function nextSequence(){
     var randomNumber = Math.floor((Math.random())*4);
     var randomChosenColour = buttonColours[randomNumber]; 
     gamePattern.push(randomChosenColour);
+    console.log(gamePattern);
 
     playGamePattern();
-
-
-    
 };
 
 function playGamePattern(){
-    var i = 0;
-    do {
+
+    
+    for(i=0; i < gamePattern.length; i++){
+        var delayTime = (i+1)*700;
+
         setTimeout(function(){
-            $("#" + gamePattern[i]).fadeOut(150).fadeIn(150);
-            i++;
-        }, 1000);
-        i++;
-    }while(i<gamePattern.length)
-};
+            animation(gamePattern[i]);
+            console.log("in" + 1);
+            console.log("in" + gamePattern[i]);
+        }, delayTime);
+        
+    
+        console.log("out" + 1);
+        console.log("out gp " + gamePattern[i]);
+    };
+}
 
 function userGamePattern(){
 
-}
+};
 
 
 
