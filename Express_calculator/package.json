@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "name": "express_calculator",
+  "version": "1.0.0",
+  "description": "easy web app calculator",
+  "main": "calculator.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Emanuele D'Agata",
+  "license": "ISC"
+}
