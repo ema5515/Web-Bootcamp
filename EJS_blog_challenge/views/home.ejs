@@ -1,5 +1,11 @@
-<%- include("header") -%>
+<%- include("partial/header") -%>
 
-<h1>it works!</h1>
+<h1>Home</h1>
+<p><%= homeStartingContent %></p>
 
-<%- include("footer") -%>
+<% for(i=0; i<posts.length; i++){ %>
+    <h1><%= posts[i].title %></h1>
+    <p><%= posts[i].text %></p>
+<% } %>
+
+<%- include("partial/footer") -%>
