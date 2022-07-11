@@ -9,6 +9,7 @@ const aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pelle
 const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamus arcu felis bibendum. Consectetur adipiscing elit duis tristique. Risus viverra adipiscing at in tellus integer feugiat. Sapien nec sagittis aliquam malesuada bibendum arcu vitae. Consequat interdum varius sit amet mattis. Iaculis nunc sed augue lacus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Pulvinar elementum integer enim neque. Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut consequat semper viverra nam libero.";
 
 const app = express();
+var _ = require("lodash");
 
 let posts = [];
 
@@ -37,6 +38,24 @@ app.get("/compose", function(req, res){
   res.render("compose");
 });
 
+app.get("/blog/:postTitle", function(req, res){
+
+  var check = "no posts founded";
+  const postTitle = _.lowerCase(req.params.postTitle);
+  
+  posts.forEach(function(post){
+    var title = _.lowerCase(post.title);
+
+    if(postTitle == title){
+      res.render("post", {postTitle: post.title,
+                          postContent: post.text,});
+
+    }
+  });
+  
+  
+});
+
 
 
 app.post("/compose", function(req, res){
@@ -44,11 +63,9 @@ app.post("/compose", function(req, res){
   const post = {title: req.body.titleToPublish,
               text: req.body.textToPublish
               };
-  posts.push(post);
+  posts.push(post); 
 
-  console.log(posts);
-
-    res.redirect("/");
+    res.redirect("/"); 
 
 });
 
