@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const date = require(__dirname + '/date.js');
+const mongoose = require('mongoose');
 
 const app = express();
 
@@ -9,23 +10,61 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public/"));
 app.set("view engine", "ejs");
 
-var items = [];
-var workItems = [];
+mongoose.connect('mongodb://localhost:27017/todolistDB');
+
+const itemsSchema = {
+    name: {
+        type: String,
+        required: true
+    },
+    done: Boolean
+};
+
+const Item = mongoose.model("item", itemsSchema);
+
+const item1 = new Item({
+    name: "buy chocolate",
+    done: 0
+});
+
+const item2 = new Item({
+    name: "buy water",
+    done: 0
+});
+
+const item3 = new Item({
+    name: "buy milk",
+    done: 0
+});
+
+// const defaultItems = [item1, item2, item3];
+
+// Item.insertMany(defaultItems, function(err){
+//     if(err){
+//         console.log(err);
+//     } else{
+//         console.log("success!");
+//     }
+// })
+
 
 app.get('/', function(req, res){
 
     var day = date.getDate();
+
+    Item.find({done: 0}, function(err, result){
+        if(err){
+            console.log(err);
+        } else{
+            res.render("list", {listTitle: day,
+                                items: result,
+                                });
+        };
+    });
     
-    res.render("list", {listTitle: day,
-                        items: items,
-                        });
+  
 });
 
-app.get('/work', function(req, res){
-    res.render("list", {listTitle: "Work",
-                        items: workItems,
-                        }); 
-});
 
 app.get('/about', function(req, res){
     res.render("about");
@@ -35,17 +74,18 @@ app.get('/about', function(req, res){
 app.post('/', function(req, res){
     var newItem = req.body.addToDo;
 
-     console.log(req.body.list);
-
-    if(req.body.list === "Work"){
-        workItems.push(newItem);
-        res.redirect("/work");
-        console.log(workItems);
-    } else {
-        items.push(newItem);
-        res.redirect("/");
-        console.log(items);
-    }
+    const item = new Item({
+        name: newItem,
+        done: 0
+    });
+ 
+    Item.insertMany(item, function(err){
+        if(err){
+            console.log(err);
+        }else{
+            res.redirect("/");
+        }
+    });
       
 });
 
