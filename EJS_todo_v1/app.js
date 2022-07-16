@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const date = require(__dirname + '/date.js');
 const mongoose = require('mongoose');
+const _ = require('lodash');
 
 const app = express();
 
@@ -20,22 +21,18 @@ const itemsSchema = {
     done: Boolean
 };
 
+const listSchema = {
+    name: {
+        type: String,
+        required: true
+    },
+    items: [itemsSchema]
+};
+
 const Item = mongoose.model("item", itemsSchema);
+const List = mongoose.model("list", listSchema);
 
-const item1 = new Item({
-    name: "buy chocolate",
-    done: 0
-});
 
-const item2 = new Item({
-    name: "buy water",
-    done: 0
-});
-
-const item3 = new Item({
-    name: "buy milk",
-    done: 0
-});
 
 // const defaultItems = [item1, item2, item3];
 
@@ -70,23 +67,75 @@ app.get('/about', function(req, res){
     res.render("about");
 });
 
+app.get('/:newList', function(req,res){
+
+    const listName = _.capitalize(req.params.newList);
+
+    List.findOne({name: listName}, function(err, results){
+        if(!err){
+            if(!results){
+
+                const list = new List({
+                    name: listName,
+                    items: []
+                }); 
+
+                list.save();
+                res.redirect("/" + listName);
+            } else{
+            res.render("list", {listTitle: listName,
+                                items: results.items
+                                });
+                            }
+        };
+    });  
+});   
 
 app.post('/', function(req, res){
     var newItem = req.body.addToDo;
+    var listTitle = req.body.list;
+    var day = date.getDate();
 
     const item = new Item({
         name: newItem,
         done: 0
     });
- 
-    Item.insertMany(item, function(err){
+
+    if(listTitle === day){
+        item.save();
+        res.redirect("/");
+    } else{
+        List.findOne({name: listTitle}, function(err, data){
+            data.items.push(item);
+            data.save();
+            res.redirect("/" + listTitle);
+        });
+    };
+      
+});
+
+app.post('/delete', function(req,res){
+    const checkbox = req.body.checkbox;
+    var listTitle = req.body.list;
+    var day = date.getDate();
+
+    if(listTitle === day){
+
+    Item.findByIdAndRemove(checkbox, function(err){
         if(err){
             console.log(err);
-        }else{
+        } else {
+            console.log("remove succesfully");
             res.redirect("/");
         }
-    });
-      
+    })
+    } else{
+        List.findOneAndUpdate({name: listTitle}, {$pull: {items: {_id: checkbox}}}, function(err, results){
+            if(!err){
+                res.redirect("/" + listTitle);
+            }
+        });
+    }   
 });
 
 
