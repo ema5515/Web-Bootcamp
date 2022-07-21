@@ -18,7 +18,7 @@ const itemsSchema = {
         type: String,
         required: true
     },
-    done: Boolean
+    done: Boolean 
 };
 
 const listSchema = {
