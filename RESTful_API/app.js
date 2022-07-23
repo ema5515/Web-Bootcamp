@@ -71,6 +71,42 @@ app.route("/articles/:title")
             }
         })
     })
+    .put(function(req, res){
+        Article.updateOne(
+            {title: req.params.title},
+            {title: req.body.title, content: req.body.content},
+            {overwrite: true},
+            function(err){
+                if(err){
+                    res.send(err);
+                }else{
+                    res.send("Success");
+                }
+            });
+    })
+    .patch(function(req, res){
+        Article.updateOne(
+            {title: req.params.title},
+            {$set: req.body},
+            function(err){
+                if(err){
+                    res.send(err);
+                }else{
+                    res.send("Success");
+                }
+            });
+    })
+    .delete(function(req, res){
+        Article.deleteOne(
+            {title: req.params.title},
+            function(err){
+                if(err){
+                    res.send(err);
+                }else{
+                    res.setDefaultEncoding("Success");
+                }
+            });
+    });
 
 
 
